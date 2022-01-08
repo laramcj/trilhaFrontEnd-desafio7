@@ -1,25 +1,10 @@
-.navbar{
-    background-color: #ffffff;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-}
-
-.navbar__container{
+.header {
     display: flex;
     justify-content: space-between;
-    height: 80px;
-    z-index: 1;
-    width: 100%;
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 50px;
-}
+    align-items: center;
+    height: 90px;
+  }
+  
 
 #navbar__logo{
     background-color:#EFC9FA;
@@ -32,7 +17,7 @@
     align-items: center;
     cursor: pointer;
     text-decoration: none;
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 .navbar__menu{
@@ -79,7 +64,7 @@
     border: #2F4C73 3px solid;
     box-shadow: 0 10px #2F4C73 ;
     color: #2F4C73;
-    font-size: 1.5rem bold;
+    font-size: 1rem bold;
 
 }
 

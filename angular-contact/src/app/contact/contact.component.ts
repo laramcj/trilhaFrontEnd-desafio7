@@ -18,6 +18,14 @@ export class ContactComponent implements OnInit{
     message : new FormControl(null, [Validators.required, Validators.minLength(10)] )
   });
 
+  getErrorMessage() {
+    if (this.email.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.email.hasError('email') ? 'Not a valid email' : '';
+  }
+  
   constructor(private http: HttpClient,
     private service: ContactService) { }
 

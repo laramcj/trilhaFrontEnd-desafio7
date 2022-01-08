@@ -5,9 +5,20 @@ import { Component, HostListener, OnInit } from '@angular/core';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
+
 export class NavComponent implements OnInit {
+
   responsivity = true;
   toggle = false;
+
+  constructor() { }
+
+  ngOnInit(): void {
+    if (window.innerWidth <= 960) {
+      this.responsivity = false
+    }
+
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -18,9 +29,6 @@ export class NavComponent implements OnInit {
     } else{
       this.responsivity = true;
     }
-  }
-
-  ngOnInit(): void {
   }
 
 }
