@@ -1,56 +1,57 @@
-<div class="main__content">
-  <h1>Questions?</h1>
-  <h2>Contact us :)</h2>
-  <form [formGroup]="contact">
-    <div class="example-container">
-      <mat-form-field appearance="outline">
-        <mat-label>Name</mat-label>
-        <input
-          matInput
-          #input
-          placeholder="Name"
-          formControlName="name"
-          required
-        />
-        <mat-hint *ngIf="name.invalid && name.touched"
-          >Name is Required</mat-hint
-        >
-      </mat-form-field>
+<form [formGroup]="contact">
+  <div class="example-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        #input
+        placeholder="Name"
+        formControlName="name"
+        required
+      />
+      <mat-hint *ngIf="name.invalid && name.touched">Name is Required</mat-hint>
+    </mat-form-field>
 
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="example@example.com"
+        formControlName="email"
+        required
+      />
+      <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <p>
       <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input
-          matInput
-          placeholder="example@example.com"
-          formControlName="email"
-          required
-        />
-        <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+        <mat-label>Subject</mat-label>
+        <input matInput formControlName="subject" placeholder="Subject" />
       </mat-form-field>
-    </div>
-    <div>
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Subject</mat-label>
-          <input matInput formControlName="subject" placeholder="Subject" />
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label row="6" formControlName="message" placeholder="Message"
-            >Message</mat-label
-          >
-          <textarea matInput></textarea>
-        </mat-form-field>
-      </p>
-    </div>
-  </form>
-  <button
-    (click)="onSubmit()"
-    [disabled]="contact.invalid"
-    type="submit"
-    class="main__btn"
-  >
-    <a href="#"><strong> Send </strong></a>
-  </button>
-</div>
+    </p>
+    <p>
+      <mat-form-field hintLabel="Min 10 caracteres" appearance="outline">
+        <mat-label>Message</mat-label>
+        <textarea
+          row="6"
+          formControlName="message"
+          matInput
+          #textarea
+          minlength="10"
+          placeholder="Message"
+          matInput
+        ></textarea>
+        <mat-hint align="end">{{ textarea.value?.length || 0 }}/10</mat-hint>
+      </mat-form-field>
+    </p>
+  </div>
+</form>
+<button
+  (click)="onSubmit()"
+  [disabled]="contact.invalid"
+  type="submit"
+  class="main__btn"
+>
+  <a href="#"><strong> Send </strong></a>
+</button>
