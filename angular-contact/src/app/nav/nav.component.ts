@@ -11,11 +11,8 @@ export class NavComponent implements OnInit {
   responsivity = true;
   toggle = false;
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    event.target.innerWidth;
-    console.log(event.target.innerWidth);
-    if (window.screen.width <= 960) {
+  toggleResponsivity(width : number) {
+    if (width <= 960) {
       this.responsivity = false;
       console.log('atingi o tamanho');
     } else {
@@ -23,11 +20,18 @@ export class NavComponent implements OnInit {
     }
   }
 
+  ngOnInit(): void {
+    this.toggleResponsivity(window.innerWidth)
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    event.target.innerWidth;
+    this.toggleResponsivity(event.target.innerWidth)
+    
+  }
+
   constructor() {}
 
-  ngOnInit(): void {
-    if (window.innerWidth <= 960) {
-      this.responsivity = false;
-    }
-  }
+  
 }

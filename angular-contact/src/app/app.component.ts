@@ -11,20 +11,26 @@ export class AppComponent {
   responsivity = true;
   toggle = false;
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    event.target.innerWidth;
-    if (window.screen.width <= 960) { 
+  toggleResponsivity(width : number) {
+    if (width <= 960) {
       this.responsivity = false;
-    } else{
+      console.log('atingi o tamanho');
+    } else {
       this.responsivity = true;
     }
   }
 
   ngOnInit(): void {
-    if (window.innerWidth <= 1060) {
-      this.responsivity = true
-    }
-
+    this.toggleResponsivity(window.innerWidth)
   }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    event.target.innerWidth;
+    console.log(event.target.innerWidth);
+    this.toggleResponsivity(window.screen.width)
+    
+  }
+
+  constructor() {}
 }

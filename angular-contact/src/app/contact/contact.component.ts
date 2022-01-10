@@ -45,6 +45,7 @@ export class ContactComponent implements OnInit{
       },
       error:(error:any) => {
         console.error(error)
+        alert(error.statusText)
       }
     });
   }
