@@ -5,33 +5,29 @@ import { Component, HostListener, OnInit } from '@angular/core';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
 })
-
 export class NavComponent implements OnInit {
-  
-  responsivity = true;
-  toggle = false;
+  responsivity;
+  toggle;
 
-  toggleResponsivity(width : number) {
+  toggleResponsivity(width: number) {
     if (width <= 960) {
       this.responsivity = false;
-      console.log('atingi o tamanho');
     } else {
       this.responsivity = true;
     }
   }
 
   ngOnInit(): void {
-    this.toggleResponsivity(window.innerWidth)
+    this.responsivity = true;
+    this.toggle = false;
+    this.toggleResponsivity(window.innerWidth);
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     event.target.innerWidth;
-    this.toggleResponsivity(event.target.innerWidth)
-    
+    this.toggleResponsivity(event.target.innerWidth);
   }
 
   constructor() {}
-
-  
 }

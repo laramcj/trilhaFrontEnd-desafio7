@@ -1,21 +1,23 @@
-import { HttpClient } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Contact } from "./contact";
-import { ContactService } from "./contact.service";
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Contact } from './contact';
+import { ContactService } from './contact.service';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
 })
-export class ContactComponent implements OnInit{
-
+export class ContactComponent implements OnInit {
   contact = new FormGroup({
-    name : new FormControl(null, Validators.required),
-    email : new FormControl(null, [Validators.required, Validators.email]),
-    subject : new FormControl(null, Validators.required),
-    message : new FormControl(null, [Validators.required, Validators.minLength(10)] )
+    name: new FormControl(null, Validators.required),
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    subject: new FormControl(null, Validators.required),
+    message: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(10),
+    ]),
   });
 
   getErrorMessage() {
@@ -25,32 +27,23 @@ export class ContactComponent implements OnInit{
 
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
-  
-  constructor(private http: HttpClient,
-    private service: ContactService) { }
 
+  constructor(private http: HttpClient, private service: ContactService) {}
 
-
-  ngOnInit(): void{      
-  }
-
-  
+  ngOnInit(): void {}
 
   onSubmit() {
-    console.log(this.contact.value);
     this.service.enviar(this.contact.value).subscribe({
-      next:(response:Contact) => {
-        console.log(response);
+      next: (response: Contact) => {
         this.contact.reset();
       },
-      error:(error:any) => {
-        console.error(error)
-        alert(error.statusText)
-      }
+      error: (error: any) => {
+        alert(
+          'Não conseguimos o envio do seu formulário, pois estamos sem contato com o banco de dados. Tente novamente!'
+        );
+      },
     });
   }
-
-  
 
   get name() {
     return this.contact.get('name');
@@ -67,7 +60,4 @@ export class ContactComponent implements OnInit{
   get message() {
     return this.contact.get('message');
   }
-
-  
-
 }
